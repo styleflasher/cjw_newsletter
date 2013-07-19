@@ -20,8 +20,6 @@
 
 require 'autoload.php';
 
-include_once( 'kernel/common/template.php' );
-
 $cli = eZCLI::instance();
 $script = eZScript::instance( array( 'description' => ( "CjW Newsletter CreateOutput\n\n" .
 
@@ -105,7 +103,7 @@ $outputContent = '';
 // fetch objectversion
 $contentObject = eZContentObjectVersion::fetchVersion( $objectVersion ,$objectId );
 
-$tpl = templateInit();
+$tpl = eZTemplate::factory();
 $tpl->setVariable('contentobject', $contentObject );
 
 if( !is_object( $contentObject ) )
@@ -226,7 +224,7 @@ function generateAbsoluteLinks( $string , $urlArray )
     */
 
     $hostUrlEZ   = $urlArray[ 'ez_url' ];
-    $hostUrlRoot = $urlArray[ 'ez_root' ];
+    $hostUrlRoot = ( trim( $urlArray['cdn_url'] !== '' ) ) ? $urlArray['cdn_url'] : $urlArray['ez_root'];
 
     $htmlPage = $string;
     $htmlPage = preg_replace("/url:/",              $hostUrlEZ,                         $htmlPage );
@@ -303,6 +301,7 @@ function getUrlArray( $siteUrl, $currentHostName, $wwwDir )
                   'current_host_name' => $currentHostName,
                   'ez_url'   => $ezUrl,
                   'ez_root'  => $ezRoot,
+                  'cdn_url' => eZINI::instance( 'cjw_newsletter.ini' )->variable( 'NewsletterSettings', 'CDNURL' )
     //              'ez_file' => $localFileUrl
      );
 }
