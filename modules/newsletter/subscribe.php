@@ -10,6 +10,19 @@
  * @filesource
  */
 
+/* STOP SPAM */
+$loadtime = $_POST['loadtime'];
+$totaltime = time() - $loadtime;
+
+if($totaltime < 5)
+{
+    #do something or just kill it
+    print_r("you are detected as spambot");
+    eZExecution::cleanExit( );
+}
+/*END STOPSPAM*/
+
+
 $module = $Params['Module'];
 $http = eZHTTPTool::instance();
 $tpl = eZTemplate::factory();
