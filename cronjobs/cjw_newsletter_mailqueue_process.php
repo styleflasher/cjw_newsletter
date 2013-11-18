@@ -165,7 +165,24 @@ foreach ( $sendObjectList as $sendObject )
             {
                  // error execption
                  $exception = $resultArray['send_result'];
-                 $progressMonitor->addEntry( "[FAILED] $itemCounter/$itemsNotSend", "Newsletter send item {$id} failed. " );
+                 $progressMonitor->addEntry( "[FAILED] $itemCounter/$itemsNotSend", "Newsletter send item {$id} failed. ".$resultArray['send_result'] );
+		
+		//when transport error occurs set status to aborted, otherwise the cronjob will never finish
+		//those entries will not be set to abort via the bounces
+                    $sendItem->setBounced();
+
+                    if( is_object( $newsletterUserObject ) )
+                    {
+                        // bounce nl user
+                        $isHardBounce = false;
+                        $newsletterUserObject->setBounced( $isHardBounce );
+                    }
+		CjwNewsletterLog::writeError( $resultArray['send_result']->getMessage() );
+		//set item to sent even we didn't send...maybe introduce a new status
+                $sendItem->setAttribute('status', CjwNewsletterEditionSendItem::STATUS_SEND );
+                $sendItem->store();
+		
+
             }
 
             // parse output_xml with user_content, normal or personalizied?
