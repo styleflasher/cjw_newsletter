@@ -188,15 +188,15 @@ foreach ( $sendObjectList as $sendObject )
     $itemsNotSend = $sendItemsStatistic['items_not_send'];
 
     // if all objects send
-    // if ( $itemsCountAll == $itemsSend )
-    // {
+    if ( $itemsCountAll == $itemsSend )
+    {
         // if ok, set status == STATUS_MAILQUEUE_PROCESS_FINISHED
         $sendObject->setAttribute('status', CjwNewsletterEditionSend::STATUS_MAILQUEUE_PROCESS_FINISHED  );
         $sendObject->store();
 
         $message = "Status set: editonSend  STATUS_MAILQUEUE_PROCESS_FINISHED";
         $cli->output( $message );
-    // }
+    }
 
     // var_dump( $sendItemsStatistic );
     $output->outputLine();
