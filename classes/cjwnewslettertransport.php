@@ -56,11 +56,15 @@ class CjwNewsletterTransport
                 $smtpTransportUser = $cjwNewsletterINI->variable( 'NewsletterMailSettings', 'SmtpTransportUser' );
                 $smtpTransportPassword = $cjwNewsletterINI->variable( 'NewsletterMailSettings', 'SmtpTransportPassword' );
                 $smtpTransportConnectionType = $cjwNewsletterINI->variable( 'NewsletterMailSettings', 'SmtpTransportConnectionType' );
+                $smtpAuthMethod = $cjwNewsletterINI->variable( 'NewsletterMailSettings', 'SmtpAuthMethod' );
 
                 $options = new ezcMailSmtpTransportOptions();
                 if( $smtpTransportConnectionType )
                 {
                     $options->connectionType = $smtpTransportConnectionType;
+                }
+                if ( $smtpAuthMethod ) {
+                   $options->preferredAuthMethod = strtoupper($smtpAuthMethod);
                 }
                 $transport = new ezcMailSmtpTransport(  $smtpTransportServer,
                                                         $smtpTransportUser,
