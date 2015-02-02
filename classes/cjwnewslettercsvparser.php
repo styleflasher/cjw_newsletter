@@ -32,7 +32,7 @@ class CjwNewsletterCsvParser
         $rowArray = array();
         $c = 0;
         $row = array();
-        $firstRow = array( 'email', 'first_name', 'last_name', 'salutation' );
+        $firstRow = array( 'email', 'first_name', 'last_name', 'salutation', 'data_text' );
 
         if ( $firstRowIsLabel == true )
         {

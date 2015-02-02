@@ -106,9 +106,9 @@ list all blacklist items
                             <input type="checkbox" name="FirstRowIsLabel" {if $first_row_is_label|eq(true())}checked="checked"{/if} />
                             {'First row is label'|i18n( 'cjw_newsletter/subscription_list_csvimport')}
 
-                                <pre>email;first_name;last_name;salutation
-user3@example.com;Julia;Mustermann;2
-user4@example.com;Max;Mustermann;1</pre>{* Output format. *}
+                                <pre>email;first_name;last_name;salutation;data_text
+user3@example.com;Julia;Mustermann;2;additional text
+user4@example.com;Max;Mustermann;1;additional info</pre>{* Output format. *}
 
                             {* Output format. *}
                             <div class="block">

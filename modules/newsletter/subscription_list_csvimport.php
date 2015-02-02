@@ -153,6 +153,18 @@ else
         $csvDataArray = $csvParserObject->getCsvDataArray();
     }
 }
+
+/*
+ * apply filter if set
+ */
+$ini = eZINI::instance( 'cjw_newsletter.ini' );
+if ( $ini->hasVariable( 'FilterSettings', 'ImportFilterClass' ) && !empty( $ini->variable( 'FilterSettings', 'ImportFilterClass' ) ) )
+{
+    $filterClassName = $ini->variable( 'FilterSettings', 'ImportFilterClass' );
+    $filter = new $filterClassName;
+    $csvDataArray = $filter->filter( $csvDataArray );
+}
+
 // read csv data
 
 
@@ -194,6 +206,11 @@ else
                 $lastName = $item[ 'last_name' ];
             else
                 $lastName = '';
+
+            if( isset( $item[ 'data_text' ] ) )
+                $dataText = $item[ 'data_text' ];
+            else
+                $dataText = '';
 
             $eZUserId = false;
             $newsletterUserId = 0;
@@ -256,6 +273,8 @@ else
                             $userObject->setAttribute( 'first_name', $firstName );
                         if ( $lastName != '' )
                             $userObject->setAttribute( 'last_name', $lastName );
+                        if ( $dataText != '' )
+                            $userObject->setAttribute( 'data_text', $dataText );
 
                         $userObject->setAttribute( 'status', CjwNewsletterUser::STATUS_CONFIRMED );
                         $userObject->setAttribute( 'import_id', $importId );
