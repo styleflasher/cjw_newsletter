@@ -158,13 +158,13 @@ else
  * apply filter if set
  */
 $ini = eZINI::instance( 'cjw_newsletter.ini' );
-if ( $ini->hasVariable( 'FilterSettings', 'ImportFilterClass' ) && !empty( $ini->variable( 'FilterSettings', 'ImportFilterClass' ) ) )
+if ( $ini->hasVariable( 'FilterSettings', 'ImportFilterClass' ) &&  $ini->variable( 'FilterSettings', 'ImportFilterClass' ) !='' )
 {
     $filterClassName = $ini->variable( 'FilterSettings', 'ImportFilterClass' );
     $filter = new $filterClassName;
     $csvDataArray = $filter->filter( $csvDataArray );
 }
-
+eZDebug::writeDebug( $csvDataArray, 'csvDataArray' );
 // read csv data
 
 
@@ -294,7 +294,9 @@ if ( $ini->hasVariable( 'FilterSettings', 'ImportFilterClass' ) && !empty( $ini-
                                                              $firstName,
                                                              $lastName,
                                                              $eZUserId,
-                                                             CjwNewsletterUser::STATUS_CONFIRMED );
+                                                             CjwNewsletterUser::STATUS_CONFIRMED,
+                                                             'default',
+                                                             $dataText );
                     $userObject->setAttribute( 'import_id', $importId );
                     // set new remote_id
                     $userObject->setAttribute( 'remote_id', 'cjwnl:csvimport:'. CjwNewsletterUtils::generateUniqueMd5Hash( $userObject->attribute( 'id' ) ) );

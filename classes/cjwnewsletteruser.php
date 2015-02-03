@@ -196,7 +196,7 @@ class CjwNewsletterUser extends eZPersistentObject
      * @param int $status
      * @return object
      */
-    static function create( $email, $salutation, $firstName, $lastName, $eZUserId, $status = CjwNewsletterUser::STATUS_PENDING, $context = 'default' )
+    static function create( $email, $salutation, $firstName, $lastName, $eZUserId, $status = CjwNewsletterUser::STATUS_PENDING, $context = 'default', $dataText='' )
     {
         $rows = array( 'created' => time(),
                        'creator_contentobject_id' => eZUser::currentUserID(),
@@ -207,7 +207,8 @@ class CjwNewsletterUser extends eZPersistentObject
                        'salutation' => $salutation,
                        'hash' => CjwNewsletterUtils::generateUniqueMd5Hash( $email ),
                        'remote_id' => 'cjwnl:'. $context .':' . CjwNewsletterUtils::generateUniqueMd5Hash( $email ),
-                       'status' => $status );
+                       'status' => $status,
+                       'data_text' => $dataText );
 
         $object = new CjwNewsletterUser( $rows );
         return $object;
@@ -233,7 +234,9 @@ class CjwNewsletterUser extends eZPersistentObject
                                                 $lastName,
                                                 $eZUserId,
                                                 $newNewsletterUserStatus = CjwNewsletterUser::STATUS_PENDING,
-                                                $context = 'default' )
+                                                $context = 'default',
+                                                $dataText = ''
+                                            )
     {
         /*
          * 1. exist a current newsletter user?
@@ -249,6 +252,7 @@ class CjwNewsletterUser extends eZPersistentObject
             $userObject->setAttribute('salutation', $salutation );
             $userObject->setAttribute('first_name', $firstName );
             $userObject->setAttribute('last_name', $lastName );
+            $userObject->setAttribute('data_text', $dataText );
             $userObject->setAttribute('ez_user_id', (int) $eZUserId );
             $userObject->setAttribute('modified', time() );
             $userObject->store();
@@ -276,7 +280,8 @@ class CjwNewsletterUser extends eZPersistentObject
                                                      $lastName,
                                                      $eZUserId,
                                                      (int) $newNewsletterUserStatus,
-                                                     $context );
+                                                     $context,
+                                                     $dataText );
             if( is_object( $userObject ) !== true )
             {
                 // error creating the new user => user with same email already exists
@@ -296,7 +301,8 @@ class CjwNewsletterUser extends eZPersistentObject
                                             'ez_user_id' => $userObject->attribute( 'ez_user_id' ),
                                             'status' => $userObject->attribute( 'status' ),
                                             'modifier' => eZUser::currentUserID(),
-                                            'context' => $context )
+                                            'context' => $context,
+                                            'data_text' => $dataText )
                                       );
 
         }
