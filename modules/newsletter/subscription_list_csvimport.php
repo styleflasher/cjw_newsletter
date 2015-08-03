@@ -273,8 +273,9 @@ eZDebug::writeDebug( $csvDataArray, 'csvDataArray' );
                             $userObject->setAttribute( 'first_name', $firstName );
                         if ( $lastName != '' )
                             $userObject->setAttribute( 'last_name', $lastName );
-                        if ( $dataText != '' )
-                            $userObject->setAttribute( 'data_text', $dataText );
+
+                        //always override data_text from csv data otherwise you can't delete it
+                        $userObject->setAttribute( 'data_text', $dataText );
 
                         $userObject->setAttribute( 'status', CjwNewsletterUser::STATUS_CONFIRMED );
                         $userObject->setAttribute( 'import_id', $importId );
