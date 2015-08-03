@@ -103,6 +103,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {'Data text'|i18n( 'cjw_newsletter/user_view' )}
+                                    </th>
+                                    <td>
+                                        <input class="halfbox" type="text" name="Subscription_DataText" value="{$newsletter_user.data_text|wash}" title="{'Data of newsletter user.'|i18n( 'cjw_newsletter/user_edit' )}"
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {'First name'|i18n( 'cjw_newsletter/user_view' )}
                                     </th>
                                     <td>

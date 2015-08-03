@@ -62,6 +62,14 @@ full view of an subscription - with all related data
                                 </tr>
                                 <tr>
                                     <th>
+                                        {'Data text'|i18n( 'cjw_newsletter/subscription_view',, hash() )}
+                                    </th>
+                                    <td>
+                                        {$subscription.newsletter_user.data_text|wash()}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {'Status'|i18n( 'cjw_newsletter/subscription_view',, hash() )}
                                     </th>
                                     <td title="{$subscription.status|wash}">

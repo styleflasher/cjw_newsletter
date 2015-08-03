@@ -1217,7 +1217,7 @@ To edit your newsletter settings please visit the following link:
         <translation>Hallo %name,
 
 Danke für die Verwendung unseres Newsletters.
-Zur Bearbeitung der Newslettereinstellungen bitte auf folgenden Link klicken: 
+Zur Bearbeitung der Newslettereinstellungen bitte auf folgenden Link klicken:
 
 %configureLink</translation>
     </message>
@@ -2651,6 +2651,10 @@ Zur Bearbeitung der Newslettereinstellungen bitte auf folgenden Link klicken:
     <message>
         <source>Status</source>
         <translation>Status</translation>
+    </message>
+    <message>
+        <source>Data text</source>
+        <translation>Daten (Text)</translation>
     </message>
     <message>
         <source>Outputformat</source>

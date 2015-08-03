@@ -39,6 +39,7 @@ $subscriptionDataArr = array(    'first_name' => '' ,
                                  'email' => '',
                                  'salutation' => '',
                                  'note' => '',
+                                 'data_text' => '',
                                  'id_array' => array(),
                                  'list_array' => array(),
                                  'list_output_format_array' => array()
@@ -140,6 +141,11 @@ if ( $http->hasPostVariable( 'Subscription_Salutation' ) )
 {
     $subscriptionDataArr['salutation'] = trim( $http->postVariable( 'Subscription_Salutation' ) );
     $newsletterUserObject->setAttribute( 'salutation', $subscriptionDataArr['salutation'] );
+}
+if ( $http->hasPostVariable( 'Subscription_DataText' ) )
+{
+    $subscriptionDataArr['data_text'] = trim( $http->postVariable( 'Subscription_DataText' ) );
+    $newsletterUserObject->setAttribute( 'data_text', $subscriptionDataArr['data_text'] );
 }
 if ( $http->hasPostVariable( 'Subscription_Note' ) )
 {
