@@ -1976,7 +1976,7 @@ Zur Bearbeitung der Newslettereinstellungen bitte auf folgenden Link klicken:
     <name>cjw_newsletter/skin/default</name>
     <message>
         <source>unsubscribe</source>
-        <translation>Abonnent beenden</translation>
+        <translation>Abonnement beenden</translation>
     </message>
     <message>
         <source>To unsubscribe your newsletter please visit the following link</source>
@@ -2031,7 +2031,7 @@ Zur Bearbeitung der Newslettereinstellungen bitte auf folgenden Link klicken:
     </message>
     <message>
         <source>unsubscribe</source>
-        <translation>Abonnent beenden</translation>
+        <translation>Abonnement beenden</translation>
     </message>
     <message>
         <source>change</source>
@@ -2745,7 +2745,7 @@ Zur Bearbeitung der Newslettereinstellungen bitte auf folgenden Link klicken:
     <name>cjw_newsletter/unsubscribe</name>
     <message>
         <source>Unsubscribe</source>
-        <translation>Abonnent beenden</translation>
+        <translation>Abonnement beenden</translation>
     </message>
     <message>
         <source>Hi %name
