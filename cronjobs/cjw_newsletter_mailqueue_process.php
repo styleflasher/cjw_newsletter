@@ -122,14 +122,16 @@ foreach ( $sendObjectList as $sendObject )
                                                '[[name]]',
                                                '[[salutation_name]]',
                                                '[[first_name]]',
-                                               '[[last_name]]'
+                                               '[[last_name]]',
+                                               '[[hash]]'
                                             ));
                 $replaceArray = array_merge( $replaceArray,
                                              array(
                                                     $newsletterUserObject->attribute( 'name' ),
                                                     $newsletterUserObject->attribute( 'salutation_name' ),
                                                     $newsletterUserObject->attribute( 'first_name' ),
-                                                    $newsletterUserObject->attribute( 'last_name' )
+                                                    $newsletterUserObject->attribute( 'last_name' ),
+                                                    $newsletterUserObject->attribute( 'hash' )
                                                   ));
             }
 
@@ -166,7 +168,7 @@ foreach ( $sendObjectList as $sendObject )
                  // error execption
                  $exception = $resultArray['send_result'];
                  $progressMonitor->addEntry( "[FAILED] $itemCounter/$itemsNotSend", "Newsletter send item {$id} failed. ".$resultArray['send_result'] );
-		
+
 		//when transport error occurs set status to aborted, otherwise the cronjob will never finish
 		//those entries will not be set to abort via the bounces
                     $sendItem->setBounced();
@@ -181,7 +183,7 @@ foreach ( $sendObjectList as $sendObject )
 		//set item to sent even we didn't send...maybe introduce a new status
                 $sendItem->setAttribute('status', CjwNewsletterEditionSendItem::STATUS_SEND );
                 $sendItem->store();
-		
+
 
             }
 
